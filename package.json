@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "convert-csv-to-json": "^2.50.0",
+    "json-2-csv": "^5.5.7",
+    "next": "15.1.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.2"
+    "react-dom": "^19.0.0"
   }
 }
