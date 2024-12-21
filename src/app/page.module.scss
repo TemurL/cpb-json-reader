@@ -8,6 +8,7 @@
 
   min-height: 100svh;
   padding: 80px;
+  padding-inline: 35px;
   gap: 64px;
   font-family: var(--font-geist-sans);
 }
@@ -72,10 +73,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -125,6 +123,8 @@ a.secondary {
 
 .tableWrapper {
   margin-block: 4rem;
+  overflow-x: scroll;
+  padding-block: 1rem;
 }
 
 .td {
@@ -140,21 +140,35 @@ a.secondary {
   background: gray;
   border-radius: 4px;
   margin-block: 10px;
+  position: sticky;
+  left: 0;
+}
+
+.fileName {
+  position: sticky;
+  left: 0;
 }
 
 .hide {
   display: none;
 }
 
+.button {
+  width: max-content;
+  padding: 10px;
+  display: block;
+  background: var(--foreground);
+  border-radius: 4px;
+  margin-block: 10px;
+  border: none;
+  color: var(--background);
+  font-weight: 700;
+}
+
 .actionBtns {
   display: flex;
   gap: 1rem;
-  margin-block: 1rem;
-}
-
-.actionBtn {
-  font-size: large;
-  padding: 5px 10px;
+  margin-block-start: 1rem;
 }
 
 .downloadAll {
@@ -165,6 +179,29 @@ a.secondary {
   margin-inline-start: auto;
   font-size: 24px;
   padding: 10px 20px;
+}
+
+.uploadBlock {
+  width: max-content;
+  margin-inline: auto;
+  padding: 30px;
+  padding-bottom: 10px;
+  border: 3px solid;
+  border-radius: 25px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.fileUploadPlaceholder {
+  width: 50px;
+  aspect-ratio: 1;
+  background-image: url('../../public/up-loading.png');
+  background-size: contain;
+  margin-block-start: 20px;
 }
 
 /* Enable hover only on non-touch devices */
@@ -217,11 +254,5 @@ a.secondary {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
   }
 }

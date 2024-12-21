@@ -1,4 +1,4 @@
-import styles from "../page.module.css";
+import styles from "@/app/page.module.scss";
 import { useState } from "react";
 import { csv2json } from 'json-2-csv';
 
@@ -10,27 +10,20 @@ const converTableDataToUrl = (tableData) => {
     return "data:text/json;charset=utf-8," + encodeURIComponent(outputJSON)
 }
 
-const CellInput = ({ field, blurHandler }) => {
-    return (
-        <td className={styles.td}>
-            <input type="text" defaultValue={field} onBlur={blurHandler} />
-        </td>
-    )
-}
-
 export default function Table({ tableData, fileName }) {
     const copyTableData = structuredClone(tableData);
 
     const [updatedDataURL, setUpdatedDataURL] = useState(converTableDataToUrl(tableData));
     const [wasUpdated, setWasUpdated] = useState(false);
 
-    const blurHandler = (e) => {
+    const fieldBlurHandler = (e) => {
         const value = e.target.value;
         const cellEl = e.target.parentElement;
         const rowElem = cellEl.parentElement;
         const fieldIndex = Array.prototype.indexOf.call(rowElem.children, cellEl);
         const rowIndex = 1;
-        copyTableData[rowIndex][fieldIndex] = value;
+
+        copyTableData[rowIndex][fieldIndex] = value ? value : 'null';
         const url = converTableDataToUrl(copyTableData);
 
         setUpdatedDataURL(url);
@@ -39,17 +32,17 @@ export default function Table({ tableData, fileName }) {
 
     return (
         <div className={styles.tableWrapper}>
-            <a className={(tableData.length > 0 && wasUpdated ? styles.downloadBtn : styles.hide) + ' download-btn'} download={'updated_' + fileName} href={updatedDataURL}>Download JSON</a>
+            <a className={styles.button + ' download-btn ' + styles.downloadBtn} download={'updated_' + fileName} href={updatedDataURL}>Download JSON</a>
+            <p className={styles.fileName}>{fileName}</p>
             <table className={styles.table}>
-                <caption>{fileName}</caption>
-                {tableData.map((row, index) => {
-                    if (index == 0) {
+                {tableData.map((row, rowIndex) => {
+                    if (rowIndex == 0) {
                         return (
-                            <thead key={'$#' + index}>
+                            <thead key={'$#' + rowIndex}>
                                 <tr>
-                                    {row.map((field, index) => {
+                                    {row.map((field, fieldIndex) => {
                                         return (
-                                            <th className={styles.td} key={'$#' + index}>{field}</th>
+                                            <th className={styles.td} key={'$#' + fieldIndex}>{field}</th>
                                         )
                                     })}
                                 </tr>
@@ -57,11 +50,13 @@ export default function Table({ tableData, fileName }) {
                         )
                     } else {
                         return (
-                            <tbody key={'$#' + index}>
+                            <tbody key={'$#' + rowIndex}>
                                 <tr>
-                                    {row.map((field, index) => {
+                                    {row.map((field, fieldIndex) => {
                                         return (
-                                            <CellInput field={field} key={'$#' + index} blurHandler={blurHandler} />
+                                            <td className={styles.td} key={'$#' + fieldIndex}>
+                                                <input type="text" defaultValue={field} onBlur={fieldBlurHandler} data-obj-path={tableData[0][fieldIndex]} />
+                                            </td>
                                         )
                                     })}
                                 </tr>
