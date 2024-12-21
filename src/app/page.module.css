@@ -119,6 +119,14 @@ a.secondary {
   border-collapse: collapse;
 }
 
+.table caption {
+  text-align: start;
+}
+
+.tableWrapper {
+  margin-block: 4rem;
+}
+
 .td {
   border: 1px solid;
   padding: 10px;
@@ -128,6 +136,35 @@ a.secondary {
 .downloadBtn {
   width: max-content;
   padding: 10px;
+  display: block;
+  background: gray;
+  border-radius: 4px;
+  margin-block: 10px;
+}
+
+.hide {
+  display: none;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+.actionBtn {
+  font-size: large;
+  padding: 5px 10px;
+}
+
+.downloadAll {
+  display: block;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  margin-inline-start: auto;
+  font-size: 24px;
+  padding: 10px 20px;
 }
 
 /* Enable hover only on non-touch devices */
