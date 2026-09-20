@@ -12,7 +12,7 @@
     "@vercel/analytics": "^1.4.1",
     "convert-csv-to-json": "^2.50.0",
     "json-2-csv": "^5.5.7",
-    "next": "15.1.2",
+    "next": "15.1.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
